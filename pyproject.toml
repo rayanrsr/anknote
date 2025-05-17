@@ -7,7 +7,9 @@ authors = [
     { name = "rayanramoul", email = "r.ramoul@instadeep.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "loguru>=0.7.3",
+]
 
 [project.scripts]
 anknote = "anknote:main"

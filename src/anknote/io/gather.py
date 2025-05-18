@@ -10,12 +10,15 @@ def retrieve_input(
     if input_path.is_dir():
         all_markdowns = input_path.rglob("**.md")
         for file_path in all_markdowns:
+            if file_path.name == "README.md":
+                continue
             content = open(file_path, "r").read()
             cards.append(NoteCard(input_path=file_path, note=content))
 
     else:
-        content = open(input_path, "r").read()
-        cards.append(NoteCard(input_path=input_path, note=content))
+        if input_path.name != "README.md":
+            content = open(input_path, "r").read()
+            cards.append(NoteCard(input_path=input_path, note=content))
     valid_cards: list[NoteCard] = []
     for nc in cards:
         card_save_path = output_path / nc.input_path.relative_to(input_path)

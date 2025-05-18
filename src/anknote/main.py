@@ -1,5 +1,6 @@
+from typing import overload
 from anknote.io.gather import retrieve_input
-from anknote.io.write import write_cards
+from anknote.io.write import generate_and_write_cards
 
 from pathlib import Path
 import argparse
@@ -22,17 +23,38 @@ def get_args():
         default="gemini/gemini-2.0-flash-lite",
     )
     parser.add_argument(
-        "-f", "--format", help="Which format to save in the output folder anki cards."
+        "-s",
+        "--save-format",
+        help="Which format to save in the output folder anki cards.",
     )
-    parser.add_argument("-i", "--in-place", help="Makes the output_path==input_path.")
+    parser.add_argument(
+        "-f",
+        "--force-overwrite",
+        help="Re-compute all files even already done ones.",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+    )
+    parser.add_argument(
+        "-i",
+        "--in-place",
+        help="Makes the output_path==input_path.",
+        action="store_true",
+    )
     return parser.parse_args()
 
 
 def main():
     args = get_args()
-    logger.debug(f"Running Anknote with the following arguments:\n{args}")
-    cards = retrieve_input(input_path=Path(args.input_path))
-    write_cards(cards, output_path=args.output, model=args.model)
+    output_path = args.input_path if args.in_place else args.output
+    cards = retrieve_input(
+        input_path=Path(args.input_path),
+        output_path=output_path,
+        overwrite=args.force_overwrite,
+    )
+    generate_and_write_cards(
+        cards,
+        model=args.model,
+    )
 
 
 if __name__ == "__main__":

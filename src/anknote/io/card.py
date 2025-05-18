@@ -1,8 +1,9 @@
-from pydantic import BaseClass
+from pydantic import BaseModel
+from pathlib import Path
 
 
-class NoteCard(BaseClass):
-    input_path: str
-    output_path: str | None = ""
+class NoteCard(BaseModel):
+    input_path: Path | str
+    output_path: Path | str | None = ""
     note: str | None = ""
-    cards: list[str]
+    cards: list[str] | None = None

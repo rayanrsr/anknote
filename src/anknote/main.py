@@ -20,7 +20,7 @@ def get_args():
 def main():
     args = get_args()
     logger.debug(f"Running Anknote with the following arguments:\n{args}")
-    retrieve_input(input_path=Path(args.input_path))
+    cards = retrieve_input(input_path=Path(args.input_path))
 
 
 if __name__ == "__main__":

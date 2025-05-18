@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "loguru>=0.7.3",
+    "pydantic>=2.11.4",
 ]
 
 [project.scripts]

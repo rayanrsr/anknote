@@ -1,13 +1,5 @@
 # Anknote
 
-## Project Goal
-
-The goal of this project is to [TODO: Describe the project goal here].
-
-## Support
-
-If you need help or have any questions, please [TODO: Describe how to get support, e.g., open an issue, contact email].
-=======
 # Anknote 📝✨
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/your_username/anknote/actions) <!-- TODO: Replace with actual
@@ -45,97 +37,91 @@ information and formulate question/answer pairs suitable for flashcards.
 4.  **Formatting:** The AI's response is parsed into a list of distinct flashcards.
 5.  **Output:** The generated flashcards are saved as `.tsv` files (tab-separated values), with each line representing a card (prompt and answer). The
 output directory structure mirrors the input structure.
+=======
+Generate Anki notes with LLMs.
 
 ## Installation
 
 ```bash
-# TODO: Add installation instructions once packaging is set up
-# For example, if published on PyPI:
-# pip install anknote
+pip install anknote
+```
 
+## Development
 
-Ensure you have Python 3.x installed. Dependencies are listed in pyproject.toml.
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management.
 
+```bash
+# Install dependencies
+uv sync --extra test --extra lint --extra docs
 
-Usage
+# Run tests
+uv run pytest
 
-The primary way to use Anknote is through its command-line interface.
+# Run linting
+uv run pre-commit run --all-files
+```
 
+## Automatic Versioning and Publishing
 
-anknote <input_path> [options]
+This project uses automated versioning and publishing to PyPI based on [Conventional Commits](https://www.conventionalcommits.org/).
 
+### How it works
 
-Arguments:
+1. **Commit Format**: Use conventional commit messages:
+   - `feat:` for new features (minor version bump)
+   - `fix:` for bug fixes (patch version bump)
+   - `feat!:` or `fix!:` for breaking changes (major version bump)
+   - `docs:`, `style:`, `refactor:`, `test:`, `chore:` for other changes (no version bump)
 
- • input_path: (Required) Path to the input markdown file or directory of markdown files.
+2. **Automatic Release**: When you push to the main branch:
+   - The system analyzes commit messages since the last release
+   - Automatically determines the next version number
+   - Creates a GitHub release with changelog
+   - Publishes the package to PyPI
 
-Options:
+### Commit Message Examples
 
- • -o, --output <path>: Specifies the directory where generated Anki cards (.tsv files) will be stored. Defaults to the current directory (.).
- • -m, --model <model_name>: Sets the AI model to use for card generation, following the LiteLLM format (e.g., gemini/gemini-2.0-flash-lite, gpt-4o).
-   Defaults to gemini/gemini-2.0-flash-lite.
- • -f, --force-overwrite: Re-generates flashcards for all input files, even if corresponding output files already exist.
- • -i, --in-place: Saves the output .tsv files in the same directory as their corresponding input .md files. This overrides the --output option.
- • --help: Shows the help message and exits.
+```bash
+# Patch release (0.1.0 → 0.1.1)
+git commit -m "fix: resolve authentication issue"
 
-Examples:
+# Minor release (0.1.0 → 0.2.0)
+git commit -m "feat: add new export functionality"
 
- 1 Generate cards from a single note file:
+# Major release (0.1.0 → 1.0.0)
+git commit -m "feat!: redesign API with breaking changes"
 
-   anknote my_notes/important_topic.md
+# No release
+git commit -m "docs: update README"
+git commit -m "test: add unit tests for auth module"
+```
 
-   (This will create important_topic.tsv in the current directory)
- 2 Generate cards from an entire directory of notes and save them to a specific output folder:
+### Setting up the commit message template
 
-   anknote ./my_knowledge_base -o ./anki_cards
+To use the provided commit message template:
 
- 3 Generate cards using a different AI model (e.g., GPT-4o):
+```bash
+git config commit.template .gitmessage
+```
 
-   anknote my_notes/chapter1.md -m gpt-4o
+### Manual Release
 
- 4 Force overwrite existing cards for a directory:
+You can also trigger a release manually from the GitHub Actions tab using the "Release" workflow.
 
-   anknote ./my_notes -f
+## PyPI Publishing Setup
 
- 5 Generate cards in-place (next to original markdown files):
+The package is automatically published to PyPI using GitHub's trusted publishing feature. No API tokens are required.
 
-   anknote ./my_notes -i
+### First-time setup on PyPI:
 
+1. Go to [PyPI](https://pypi.org) and create an account
+2. Create a new project named `anknote`
+3. Go to the project settings and add a "Trusted Publisher"
+4. Configure it with:
+   - Repository: `your-username/anknote`
+   - Workflow: `release.yaml`
+   - Environment: `pypi`
 
+## License
 
-Configuration
-
-AI Model API Keys:
-
-Anknote uses LiteLLM to interact with various AI models. You will typically need to set environment variables for the API keys of the models you intend to
-use. For example:
-
- • For OpenAI models: OPENAI_API_KEY="your_api_key"
- • For Google Gemini models: GEMINI_API_KEY="your_api_key"
-
-Please refer to the LiteLLM documentation for specific instructions on configuring API keys for different providers.
-
-
-Contributing
-
-Contributions are welcome! If you'd like to contribute, please:
-
- 1 Fork the repository.
- 2 Create a new branch for your feature or bug fix.
- 3 Make your changes.
- 4 Add tests for your changes.
- 5 Ensure all tests pass.
- 6 Submit a pull request.
-
-Please open an issue first to discuss any significant changes.
-
-
-License
-
-This project is licensed under the terms of the LICENSE file.
-
-
-Support
-
-
-If you encounter any issues, have questions, or want to suggest features, please open an issue on GitHub.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

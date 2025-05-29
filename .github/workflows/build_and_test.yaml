@@ -1,0 +1,32 @@
+name: Unit Testing 🧪
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repo 📦
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.4.24" # Pin to a specific uv version
+          enable-cache: true # Enable caching for uv
+          cache-dependency-glob: "uv.lock"
+
+      - name: Set up Python
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Sync project dependencies
+        run: uv sync --extra cpu --extra test
+
+      - name: Run tests
+        run: export PYTHONPATH="$PYTHONPATH:$PWD" && uv run pytest # Use uv to run pytest on the tests directory

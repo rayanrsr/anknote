@@ -1,12 +1,33 @@
 # Usage Guide
 
-## Basic Usage
+Anknote is a command-line tool. All examples below show both uvx (recommended) and traditional pip installation usage.
+
+## Prerequisites
+
+Before using Anknote, set up your AI API key:
+
+```bash
+# For OpenAI (recommended for beginners)
+export OPENAI_API_KEY="your-openai-api-key-here"
+
+# For Anthropic Claude
+export ANTHROPIC_API_KEY="your-anthropic-api-key-here"
+
+# For Google Gemini
+export GOOGLE_API_KEY="your-google-api-key-here"
+```
+
+## Basic Command Line Usage
 
 ### Process a Single File
 
 Generate flashcards from a markdown file:
 
 ```bash
+# Using uvx (recommended)
+uvx anknote notes/python-basics.md
+
+# Using pip installation
 anknote notes/python-basics.md
 ```
 
@@ -17,6 +38,10 @@ This creates `python-basics.tsv` in the current directory.
 Process all markdown files in a directory:
 
 ```bash
+# Using uvx (recommended)
+uvx anknote notes/ -o flashcards/
+
+# Using pip installation
 anknote notes/ -o flashcards/
 ```
 
@@ -24,83 +49,192 @@ This processes all `.md` files in `notes/` and saves the output TSV files in `fl
 
 ## Command Line Options
 
-### Input and Output
+### Complete Command Syntax
 
 ```bash
+# uvx syntax
+uvx anknote INPUT [OPTIONS]
+
+# pip installation syntax
 anknote INPUT [OPTIONS]
 ```
 
-- `INPUT`: Path to markdown file or directory
-- `-o, --output DIR`: Output directory (default: current directory)
-- `--in-place`: Save output files next to input files
-- `--force-overwrite`: Overwrite existing output files
+Where:
+- `INPUT`: Path to a markdown file or directory containing markdown files
+- `[OPTIONS]`: Optional command line flags (see below)
+
+### Input and Output Options
+
+```bash
+# Specify output directory
+uvx anknote INPUT -o DIR
+uvx anknote INPUT --output DIR
+
+# Save output files next to input files
+uvx anknote INPUT --in-place
+
+# Overwrite existing output files
+uvx anknote INPUT --force-overwrite
+```
+
+**Examples:**
+
+```bash
+# Save to specific directory
+uvx anknote notes.md -o /path/to/flashcards/
+
+# Process directory and save files in-place
+uvx anknote study-materials/ --in-place
+
+# Force overwrite existing files
+uvx anknote notes/ -o flashcards/ --force-overwrite
+```
 
 ### AI Model Configuration
 
 ```bash
-anknote notes.md -m gpt-4o-mini --max-retries 5
+# Specify AI model
+uvx anknote notes.md -m MODEL_NAME
+uvx anknote notes.md --model MODEL_NAME
+
+# Set maximum retry attempts
+uvx anknote notes.md --max-retries NUMBER
 ```
 
-- `-m, --model`: AI model to use (default: from config)
-- `--max-retries`: Maximum retry attempts for API calls
-
-### Logging and Output
+**Examples:**
 
 ```bash
-anknote notes.md -v  # Verbose output
-anknote notes.md -q  # Quiet mode
+# Use GPT-4o mini (fast and cost-effective)
+uvx anknote notes.md -m gpt-4o-mini
+
+# Use Claude 3 Haiku
+uvx anknote notes.md -m claude-3-haiku-20240307
+
+# Use with retries for unreliable connections
+uvx anknote notes.md -m gpt-4o-mini --max-retries 5
 ```
 
-- `-v, --verbose`: Enable verbose logging
-- `-q, --quiet`: Suppress non-error output
-
-### Configuration
+### Logging and Output Control
 
 ```bash
-anknote --init-config          # Create default config file
-anknote --show-config          # Show current configuration
-anknote --config myconfig.json # Use custom config file
+# Verbose output (see detailed processing info)
+uvx anknote notes.md -v
+uvx anknote notes.md --verbose
+
+# Quiet mode (suppress non-error output)
+uvx anknote notes.md -q
+uvx anknote notes.md --quiet
 ```
 
-## Examples
+### Configuration Management
+
+```bash
+# Create default configuration file
+uvx anknote --init-config
+
+# Show current configuration
+uvx anknote --show-config
+
+# Use custom configuration file
+uvx anknote --config myconfig.json notes.md
+
+# Show help
+uvx anknote --help
+
+# Show version
+uvx anknote --version
+```
+
+## Step-by-Step Examples
+
+### Example 1: First Time User
+
+1. Set up your API key:
+   ```bash
+   export OPENAI_API_KEY="sk-your-key-here"
+   ```
+
+2. Test with a simple file:
+   ```bash
+   uvx anknote my-notes.md -v
+   ```
+
+3. Check the generated `.tsv` file and import to Anki.
+
+### Example 2: Process Multiple Files
+
+1. Organize your notes in a directory:
+   ```
+   study-materials/
+   ├── biology-chapter1.md
+   ├── chemistry-basics.md
+   └── physics-motion.md
+   ```
+
+2. Process all files:
+   ```bash
+   uvx anknote study-materials/ -o flashcards/
+   ```
+
+3. Find your flashcards in the `flashcards/` directory.
+
+### Example 3: Advanced Configuration
+
+1. Create a configuration file:
+   ```bash
+   uvx anknote --init-config
+   ```
+
+2. Edit `.anknote.json` to customize settings.
+
+3. Process with custom settings:
+   ```bash
+   uvx anknote notes/ --config .anknote.json -v
+   ```
+
+## Real-World Command Examples
 
 ### Basic Processing
 
 ```bash
-# Process a single file
-anknote lecture-notes.md
+# Process a lecture note
+uvx anknote "Lecture 1 - Introduction to Psychology.md"
 
-# Process with custom model
-anknote lecture-notes.md -m claude-3-haiku-20240307
+# Process with specific model
+uvx anknote lecture-notes.md -m claude-3-haiku-20240307
 
-# Process with output directory
-anknote lecture-notes.md -o /path/to/anki-imports/
+# Process with custom output location
+uvx anknote lecture-notes.md -o ~/anki-imports/
 ```
 
 ### Batch Processing
 
 ```bash
-# Process all markdown files in a directory
-anknote study-materials/ -o flashcards/
+# Process entire course directory
+uvx anknote "CS101 Notes/" -o "CS101 Flashcards/"
 
-# Process with overwrite protection
-anknote study-materials/ -o flashcards/ --force-overwrite
+# Process with progress tracking
+uvx anknote textbook-chapters/ -o flashcards/ -v
 
-# In-place processing (save next to source files)
-anknote study-materials/ --in-place
+# Process and overwrite existing files
+uvx anknote updated-notes/ -o flashcards/ --force-overwrite
 ```
 
-### Advanced Usage
+### Production Usage
 
 ```bash
-# Use custom configuration and verbose output
-anknote notes/ --config my-anknote-config.json -v
+# High reliability processing
+uvx anknote important-notes/ \
+  -o production-flashcards/ \
+  --max-retries 10 \
+  --verbose \
+  --force-overwrite
 
-# Process with custom prompt file
-anknote notes.md --prompt-file custom-prompt.txt
-
-# Maximum retries for unreliable connections
-anknote notes.md --max-retries 10
+# Use custom configuration for specific workflow
+uvx anknote research-papers/ \
+  --config academic-config.json \
+  -o research-flashcards/ \
+  -v
 ```
 
 ## Output Format
@@ -189,8 +323,39 @@ For large note collections:
 ### Getting Help
 
 ```bash
-anknote --help  # Show all options
-anknote -v      # Verbose output for debugging
+# Show all available options
+uvx anknote --help       # Using uvx
+anknote --help           # Using pip installation
+
+# Show version information
+uvx anknote --version    # Using uvx
+anknote --version        # Using pip installation
+
+# Verbose output for debugging
+uvx anknote notes.md -v  # Using uvx
+anknote notes.md -v      # Using pip installation
+
+# Show current configuration
+uvx anknote --show-config  # Using uvx
+anknote --show-config      # Using pip installation
+```
+
+### Debugging Commands
+
+If you're having issues, try these diagnostic commands:
+
+```bash
+# Check if anknote can run at all
+uvx anknote --help
+
+# Test with verbose output on a small file
+uvx anknote test-file.md -v
+
+# Check your current configuration
+uvx anknote --show-config
+
+# Verify your API key is set
+echo $OPENAI_API_KEY  # Should show your key (partially hidden for security)
 ```
 
 For more help, see the [Configuration Guide](configuration.md) or check the [API Reference](reference/anknote/index.md).

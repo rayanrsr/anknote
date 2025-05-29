@@ -1,50 +1,94 @@
-# Anknote
-
 # Anknote 📝✨
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/your_username/anknote/actions) <!-- TODO: Replace with actual
-build status badge -->
+[![PyPI version](https://badge.fury.io/py/anknote.svg)](https://badge.fury.io/py/anknote)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Anknote is a powerful command-line tool that intelligently generates Anki flashcards from your markdown notes using state-of-the-art AI models.**
 
 Stop manually creating flashcards and let Anknote help you focus on what truly matters: learning and retaining knowledge efficiently.
 
-## Overview
+## Quick Start
 
-Anknote processes your markdown files (either a single file or an entire directory structure) and leverages AI to identify key concepts, important
-information, and insightful questions. It then transforms these into a structured format ready for import into Anki, your favorite spaced repetition
-software.
+### Recommended: Use uvx (uv tool)
 
-The tool is designed to create flashcards that emphasize understanding and intuition rather than rote memorization of simple facts or definitions.
+```bash
+# Run directly without installation
+uvx anknote --help
 
-## Features
+# Process a file
+export OPENAI_API_KEY="your-api-key-here"
+uvx anknote my-notes.md
 
-*   **AI-Powered Card Generation:** Uses language models via LiteLLM (e.g., Gemini, GPT) to create high-quality flashcards.
-*   **Markdown Input:** Accepts individual `.md` files or recursively scans directories for notes.
-*   **Anki-Compatible Output:** Generates `.tsv` files that can be directly imported into Anki.
-*   **Customizable AI Model:** Easily switch between different AI models supported by LiteLLM.
-*   **Selective Processing:** Avoids re-processing notes for which flashcards already exist (unless forced).
-*   **In-Place Output:** Option to save generated flashcards alongside your original notes.
-*   **Progress Tracking:** Clear progress bar during the generation process.
-*   **Focus on Conceptual Understanding:** Prompts are designed to extract non-trivial ideas and conceptual links.
+# Process a directory
+uvx anknote notes/ -o flashcards/
+```
 
-## How It Works
-
-1.  **Input:** You provide a path to a markdown file or a directory containing markdown files.
-2.  **Parsing & Retrieval:** Anknote reads your notes. If a directory is provided, it recursively finds all `.md` files.
-3.  **AI Processing:** For each note, the content is sent to the configured AI model with a specialized prompt. This prompt guides the AI to extract key
-information and formulate question/answer pairs suitable for flashcards.
-4.  **Formatting:** The AI's response is parsed into a list of distinct flashcards.
-5.  **Output:** The generated flashcards are saved as `.tsv` files (tab-separated values), with each line representing a card (prompt and answer). The
-output directory structure mirrors the input structure.
-=======
-Generate Anki notes with LLMs.
-
-## Installation
+### Alternative: Install with pip
 
 ```bash
 pip install anknote
+anknote my-notes.md
 ```
+
+## Features
+
+- 🤖 **AI-Powered Generation**: Uses LiteLLM to support multiple AI models (OpenAI, Anthropic, Google, etc.)
+- 📝 **Markdown Processing**: Automatically processes markdown files and directories
+- ⚙️ **Configurable**: Flexible configuration via files, CLI arguments, and environment variables
+- 🔄 **Batch Processing**: Process multiple files at once with progress tracking
+- 📊 **TSV Output**: Generates Anki-compatible TSV files for easy import
+- 🛡️ **Robust**: Built-in error handling, retry logic, and validation
+
+## Command Line Usage
+
+### Basic Commands
+
+```bash
+# Set up your API key
+export OPENAI_API_KEY="your-api-key-here"
+
+# Process a single file
+uvx anknote lecture-notes.md
+
+# Process a directory with output folder
+uvx anknote study-materials/ -o flashcards/
+
+# Use different AI model
+uvx anknote notes.md -m claude-3-haiku-20240307
+
+# Verbose output for debugging
+uvx anknote notes.md -v
+
+# Show help
+uvx anknote --help
+```
+
+### Real-World Examples
+
+```bash
+# Process course materials
+uvx anknote "Biology Course/" -o "Biology Flashcards/" -v
+
+# High reliability processing
+uvx anknote important-notes/ --max-retries 10 --force-overwrite
+
+# Create configuration file
+uvx anknote --init-config
+```
+
+## How It Works
+
+1. **Extract Content**: Anknote reads your markdown files and extracts the content
+2. **AI Processing**: The content is sent to an AI model with a carefully crafted prompt
+3. **Parse Cards**: The AI response is parsed to extract question-answer pairs
+4. **Generate TSV**: Cards are saved in Anki-compatible TSV format for import
+
+## Documentation
+
+- [Installation Guide](https://anknote.readthedocs.io/installation/) - Detailed setup instructions
+- [Usage Guide](https://anknote.readthedocs.io/usage/) - Complete command-line reference
+- [Configuration](https://anknote.readthedocs.io/configuration/) - Customize for your workflow
 
 ## Development
 
@@ -65,20 +109,6 @@ uv run pre-commit run --all-files
 
 This project uses automated versioning and publishing to PyPI based on [Conventional Commits](https://www.conventionalcommits.org/).
 
-### How it works
-
-1. **Commit Format**: Use conventional commit messages:
-   - `feat:` for new features (minor version bump)
-   - `fix:` for bug fixes (patch version bump)
-   - `feat!:` or `fix!:` for breaking changes (major version bump)
-   - `docs:`, `style:`, `refactor:`, `test:`, `chore:` for other changes (no version bump)
-
-2. **Automatic Release**: When you push to the main branch:
-   - The system analyzes commit messages since the last release
-   - Automatically determines the next version number
-   - Creates a GitHub release with changelog
-   - Publishes the package to PyPI
-
 ### Commit Message Examples
 
 ```bash
@@ -90,37 +120,7 @@ git commit -m "feat: add new export functionality"
 
 # Major release (0.1.0 → 1.0.0)
 git commit -m "feat!: redesign API with breaking changes"
-
-# No release
-git commit -m "docs: update README"
-git commit -m "test: add unit tests for auth module"
 ```
-
-### Setting up the commit message template
-
-To use the provided commit message template:
-
-```bash
-git config commit.template .gitmessage
-```
-
-### Manual Release
-
-You can also trigger a release manually from the GitHub Actions tab using the "Release" workflow.
-
-## PyPI Publishing Setup
-
-The package is automatically published to PyPI using GitHub's trusted publishing feature. No API tokens are required.
-
-### First-time setup on PyPI:
-
-1. Go to [PyPI](https://pypi.org) and create an account
-2. Create a new project named `anknote`
-3. Go to the project settings and add a "Trusted Publisher"
-4. Configure it with:
-   - Repository: `your-username/anknote`
-   - Workflow: `release.yaml`
-   - Environment: `pypi`
 
 ## License
 

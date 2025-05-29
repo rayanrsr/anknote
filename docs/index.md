@@ -18,23 +18,53 @@ Anknote is a command-line tool that automatically generates Anki flashcards from
 
 ## Quick Start
 
-Install Anknote:
+### Installation
+
+**Recommended**: Use uvx (uv tool) for the best experience:
+
+```bash
+uvx anknote --help
+```
+
+This runs Anknote without permanent installation. For regular use, you can also install with pip:
 
 ```bash
 pip install anknote
 ```
 
-Generate flashcards from a markdown file:
+### Command Line Usage
+
+Set up your AI API key first:
 
 ```bash
+# For OpenAI (recommended for beginners)
+export OPENAI_API_KEY="your-openai-api-key-here"
+
+# Or for Anthropic Claude
+export ANTHROPIC_API_KEY="your-anthropic-api-key-here"
+```
+
+Generate flashcards from a single markdown file:
+
+```bash
+# Using uvx (recommended)
+uvx anknote my-notes.md
+
+# Or if installed with pip
 anknote my-notes.md
 ```
 
-Process an entire directory:
+Process an entire directory of markdown files:
 
 ```bash
+# Using uvx
+uvx anknote notes/ -o flashcards/
+
+# Or if installed with pip
 anknote notes/ -o flashcards/
 ```
+
+The generated `.tsv` files can be directly imported into Anki!
 
 ## How It Works
 

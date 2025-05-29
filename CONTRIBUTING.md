@@ -67,7 +67,7 @@ BREAKING CHANGE: The old API is no longer supported
    ```bash
    # Run tests
    uv run pytest
-   
+
    # Run linting
    uv run pre-commit run --all-files
    ```
@@ -158,4 +158,4 @@ Releases are fully automated, but you can also trigger a manual release:
 If you have any questions about the development process, feel free to:
 - Open an issue for discussion
 - Check existing issues and discussions
-- Review the README.md for additional information 
+- Review the README.md for additional information

@@ -20,4 +20,4 @@
 # feat: add email notifications
 # fix(auth): handle login error correctly
 # docs: update README with new installation steps
-# feat!: send an email to the customer when a product is shipped (BREAKING CHANGE) 
+# feat!: send an email to the customer when a product is shipped (BREAKING CHANGE)

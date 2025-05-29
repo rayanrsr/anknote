@@ -77,3 +77,15 @@ patch_tags = ["fix", "perf"]
 
 [tool.semantic_release.remote.token]
 env = "GH_TOKEN"
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true

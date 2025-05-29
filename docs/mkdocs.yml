@@ -1,0 +1,98 @@
+site_name: Anknote
+site_description: CLI tool for generating Anki flashcards from markdown notes using AI
+site_url: https://rayanramoul.github.io/anknote/
+repo_name: rayanramoul/anknote
+repo_url: https://github.com/rayanramoul/anknote
+
+docs_dir: .
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.share
+    - header.autohide
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: false
+            show_root_heading: true
+            show_root_toc_entry: false
+            heading_level: 2
+  - gen-files:
+      scripts:
+        - gen_ref_pages.py
+  - same-dir
+  - mermaid2
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Configuration: configuration.md
+  - API Reference:
+    - Overview: reference/anknote/index.md
+    - Main: reference/anknote/main.md
+    - Configuration: reference/anknote/config.md
+    - I/O:
+      - Card: reference/anknote/io/card.md
+      - Gather: reference/anknote/io/gather.md
+      - Write: reference/anknote/io/write.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rayanramoul/anknote
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/anknote/
+
+watch:
+  - ../src/anknote

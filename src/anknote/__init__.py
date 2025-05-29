@@ -1,2 +1,5 @@
-def main() -> None:
-    print("Hello from anknote!")
+__version__ = "0.1.1"
+
+from anknote.main import main
+
+__all__ = ["main", "__version__"]

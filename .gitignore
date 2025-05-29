@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+*.pyd
 
 # Distribution / packaging
 .Python
@@ -20,6 +21,7 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -61,6 +63,10 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+# Local overrides & environment-specific files
+# Covers files like settings.local.py, .env.local, etc.
+*.local
+
 # Flask stuff:
 instance/
 .webassets-cache
@@ -85,7 +91,7 @@ ipython_config.py
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
 #   intended to run in multiple environments; otherwise, check them in:
-# .python-version
+.python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
@@ -136,6 +142,14 @@ ENV/
 env.bak/
 venv.bak/
 
+# Common editor temporary/backup files
+# For editors like Vim, Emacs, gedit, etc.
+*~       # Backup files (e.g., Emacs, gedit)
+.#*      # Emacs lock files (for unsaved buffers)
+*.swp    # Vim swap files
+*.swo    # Vim swap files (persistent undo)
+*.bak    # General backup files
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -144,7 +158,8 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-/site
+/site/
+docs/site/
 
 # mypy
 .mypy_cache/
@@ -172,3 +187,121 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+.aider*
+output/
+outputs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.hypothesis/
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Profiling
+*.prof
+
+# Logs
+*.log
+
+# Local environment variables
+.env.local
+
+# Node modules (if any)
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
+
+# Swap files
+*.swp
+*.swo
+
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+
+# Database files
+*.db
+*.sqlite
+
+# Cache files
+*.cache
+
+# Build outputs
+build/
+dist/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Editor backups
+*~
+
+# emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile
+
+# directory configuration
+.dir-locals.el
+
+# aider
+.aider*

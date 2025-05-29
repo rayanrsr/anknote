@@ -1,0 +1,9 @@
+{
+  "model": "gemini/gemini-2.0-flash-lite",
+  "max_retries": 3,
+  "skip_readme": true,
+  "file_extensions": [".md", ".markdown"],
+  "output_format": "tsv",
+  "escape_tabs": true,
+  "log_level": "INFO"
+}

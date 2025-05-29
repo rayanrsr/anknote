@@ -1,25 +1,30 @@
 [project]
 name = "anknote"
-version = "0.1.0"
+version = "0.1.1"
 description = "Generate Anki notes with LLMs."
 readme = "README.md"
 authors = [{ name = "rayanramoul", email = "raysamram@gmail.com" }]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "litellm>=1.70.0",
+    "loguru>=0.7.3",
+    "pydantic>=2.11.4",
+    "rich>=14.0.0",
+]
 
 [project.optional-dependencies]
 test = ["pytest>=6.2.4"]
 docs = [
-  "mkdocs-autorefs==1.2.0",
+  "mkdocs-autorefs==1.4.2",
   "mkdocs-gen-files==0.5.0",
   "mkdocs-get-deps==0.2.0",
   "mkdocs-material-extensions==1.3.1",
-  "mkdocs-material==9.5.41",
-  "mkdocs-mermaid2-plugin==1.2.1",
+  "mkdocs-material==9.6.14",
+  "mkdocs-mermaid2-plugin==1.1.1",
   "mkdocs==1.6.1",
   "mkdocstrings-python==1.12.1",
   "mkdocstrings==0.26.2",
-  "pymdown-extensions==10.11.2",
+  "pymdown-extensions==10.15",
   "mkdocs-same-dir",
 ]
 lint = [
@@ -41,3 +46,44 @@ anknote = "anknote:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+version_variables = [
+    "src/anknote/__init__.py:__version__",
+]
+upload_to_vcs_release = true
+
+[tool.semantic_release.branches.main]
+match = "(main|master)"
+prerelease_token = "rc"
+prerelease = false
+
+[tool.semantic_release.changelog]
+template_dir = "templates"
+changelog_file = "CHANGELOG.md"
+exclude_commit_patterns = [
+    "^Merge pull request",
+    "^Merge branch",
+    "^Bump version",
+]
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]
+
+[tool.semantic_release.remote.token]
+env = "GH_TOKEN"
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true

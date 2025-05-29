@@ -31,4 +31,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AI integration with flashcard generation
 - Command-line interface
 - Configuration system
-- Test framework 
+- Test framework

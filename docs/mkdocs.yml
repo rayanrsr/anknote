@@ -95,4 +95,4 @@ extra:
       link: https://pypi.org/project/anknote/
 
 watch:
-  - ../src/anknote 
+  - ../src/anknote

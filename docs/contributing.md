@@ -175,4 +175,4 @@ Releases are automated through GitHub Actions when a new tag is pushed:
 
 ## Code of Conduct
 
-Please be respectful and inclusive in all interactions. We follow the Python community's code of conduct. 
+Please be respectful and inclusive in all interactions. We follow the Python community's code of conduct.

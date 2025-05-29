@@ -50,8 +50,8 @@ Given a markdown file like this:
 ```markdown
 # Python Basics
 
-Python is a high-level programming language. It was created by Guido van Rossum 
-and released in 1991. Python emphasizes code readability and uses significant 
+Python is a high-level programming language. It was created by Guido van Rossum
+and released in 1991. Python emphasizes code readability and uses significant
 indentation.
 
 ## Key Features
@@ -71,4 +71,4 @@ Anknote generates flashcards like:
 - [Installation Guide](installation.md) - Detailed installation instructions
 - [Usage Guide](usage.md) - Learn all the command-line options
 - [Configuration](configuration.md) - Customize Anknote for your workflow
-- [API Reference](reference/anknote/index.md) - Complete API documentation 
+- [API Reference](reference/anknote/index.md) - Complete API documentation

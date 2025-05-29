@@ -251,4 +251,4 @@ Anknote validates all configuration values:
 - Log levels must be valid Python logging levels
 - File extensions must start with a dot
 
-Invalid configurations will show an error message with suggestions for fixing them. 
+Invalid configurations will show an error message with suggestions for fixing them.

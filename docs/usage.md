@@ -193,4 +193,4 @@ anknote --help  # Show all options
 anknote -v      # Verbose output for debugging
 ```
 
-For more help, see the [Configuration Guide](configuration.md) or check the [API Reference](reference/anknote/index.md). 
+For more help, see the [Configuration Guide](configuration.md) or check the [API Reference](reference/anknote/index.md).

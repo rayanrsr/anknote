@@ -78,4 +78,4 @@ This creates a `.anknote.json` file in your current directory. See the [Configur
 ## Next Steps
 
 - [Usage Guide](usage.md) - Learn how to use Anknote
-- [Configuration](configuration.md) - Customize your setup 
+- [Configuration](configuration.md) - Customize your setup

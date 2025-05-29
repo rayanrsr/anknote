@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+*.pyd
 
 # Distribution / packaging
 .Python
@@ -60,6 +61,10 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+
+# Local overrides & environment-specific files
+# Covers files like settings.local.py, .env.local, etc.
+*.local
 
 # Flask stuff:
 instance/
@@ -136,6 +141,14 @@ ENV/
 env.bak/
 venv.bak/
 
+# Common editor temporary/backup files
+# For editors like Vim, Emacs, gedit, etc.
+*~       # Backup files (e.g., Emacs, gedit)
+.#*      # Emacs lock files (for unsaved buffers)
+*.swp    # Vim swap files
+*.swo    # Vim swap files (persistent undo)
+*.bak    # General backup files
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -172,3 +185,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+.aider*
+output/
+outputs/

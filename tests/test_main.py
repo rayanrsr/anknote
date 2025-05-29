@@ -31,7 +31,7 @@ class TestArgParsing:
             args = get_args()
             assert args.input_path == 'test.md'
             assert args.output == '.'
-            assert args.model == 'gemini/gemini-2.0-flash-lite'
+            assert args.model is None  # No default in CLI, comes from config
             assert not args.force_overwrite
             assert not args.in_place
             assert not args.verbose

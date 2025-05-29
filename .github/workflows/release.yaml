@@ -25,15 +25,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
           version: "0.4.24"
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-
-      - name: Set up Python
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
 
       - name: Sync project dependencies
         run: uv sync --extra test
@@ -61,14 +63,16 @@ jobs:
         with:
           ref: ${{ needs.release.outputs.tag }}
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
           version: "0.4.24"
           enable-cache: true
-
-      - name: Set up Python
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
 
       - name: Build package
         run: uv build

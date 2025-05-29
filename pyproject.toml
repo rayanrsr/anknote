@@ -52,8 +52,6 @@ version_toml = ["pyproject.toml:project.version"]
 version_variables = [
     "src/anknote/__init__.py:__version__",
 ]
-build_command = "uv build"
-dist_glob_patterns = ["dist/*"]
 upload_to_vcs_release = true
 
 [tool.semantic_release.branches.main]

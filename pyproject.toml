@@ -5,7 +5,12 @@ description = "Generate Anki notes with LLMs."
 readme = "README.md"
 authors = [{ name = "rayanramoul", email = "raysamram@gmail.com" }]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "litellm>=1.70.0",
+    "loguru>=0.7.3",
+    "pydantic>=2.11.4",
+    "rich>=14.0.0",
+]
 
 [project.optional-dependencies]
 test = ["pytest>=6.2.4"]

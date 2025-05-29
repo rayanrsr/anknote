@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.1.1 (2025-05-29)
+
+### Bug Fixes
+
+* fix: add pypi token ([`df70df1`](https://github.com/rayanramoul/anknote/commit/df70df14dd06c356bc0880486a0289ba0f248620))
+
+
 ## v0.1.0 (2025-05-29)
 
 ### Bug Fixes

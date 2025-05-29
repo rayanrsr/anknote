@@ -1,6 +1,6 @@
 [project]
 name = "anknote"
-version = "0.1.0"
+version = "0.1.1"
 description = "Generate Anki notes with LLMs."
 readme = "README.md"
 authors = [{ name = "rayanramoul", email = "raysamram@gmail.com" }]
